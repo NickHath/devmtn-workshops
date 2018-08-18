@@ -1,0 +1,127 @@
+$teal: #00b3ac
+*
+  font-weight: normal
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+html
+  font-family: Arial, sans-serif  
+h1
+  font-size: 20px
+body
+  background: #eee
+  margin: 0
+hr
+  border-top: 1px solid rgba(darken($teal, 15%), .4)
+  border-bottom: 1px solid rgba(lighten($teal, 15%), .4)
+.menu-item
+  text-transform: uppercase
+  transition: color .3s 
+  cursor: pointer
+  color: darken($teal, 18%)
+  position: relative
+  &:hover
+    color: #eee
+p
+  font-size: 11px
+  padding: 1rem 0
+.white-text, .active
+  color: #eee
+.tall-line-height
+  line-height: 1.6rem
+.pointeightrem-font
+  font-size: .8rem
+.faint-text
+  color: rgba(0,0,0,.4)
+.plain-hr
+  border-color: rgba(0,0,0,.1)
+.darkblue-text
+  color: darken($teal, 18%)
+.margin-top
+  margin-top: 2rem
+#main
+  padding: 1rem
+  #container-a
+    display: flex
+    // border: 1px solid limegreen
+    width: 1030px
+    margin: 0 auto
+    margin-top: 5rem
+// @media screen and (max-width : 1300px)
+//   #container-a
+//     width: 1000px
+//     background: red
+#blue-sidebar
+  background: $teal
+  width: 300px
+  padding: 0 2rem
+  padding-bottom: 1rem
+  div
+    border-top: 8px solid darken($teal, 20%)
+.menu-item.active::after
+  content: ''
+  position: absolute
+  right: -45px
+  top: 10px
+  width: 0
+  height: 0
+  border-top: 10px solid transparent
+  border-left: 16px solid $teal
+  border-bottom: 10px solid transparent
+#right-side-content
+  flex: auto
+  background: #fff
+  overflow-x: hidden
+  .rs-container
+    display: none // <-- it works
+    position: absolute
+    // border: 2px solid pink
+    padding: 1.5rem
+    opacity: 0
+    pointer-events: none
+    &.show
+      display: block // <-- it works
+      animation: fadein 1.4s forwards
+      pointer-events: auto
+      @keyframes fadein
+        from
+          opacity: 0
+        to
+          opacity: 1
+    h1
+      // border: 1px solid dodgerblue
+      margin-bottom: 1.8rem
+    .article-container
+      // border: 1px solid blue
+      display: flex
+      flex-direction: row
+      margin: 0 -5px
+    .article-container article
+      margin: 0 5px
+      background: url("https://drive.google.com/uc?id=1iCxYsP5bMsUY5Z6Mnpmk00RyfIkgdLdu") repeat-x center top
+      width: 220px
+      height: 318px
+      // border: 1px solid limegreen
+      padding-top: 2rem
+      i
+        color: $teal
+        font-size: 38px
+      .title-with-icon
+        display: flex
+        height: 140px
+        h1
+          padding-left: 1rem
+          font-weight: 700
+          cursor: pointer
+          transition: color .2s
+          &:hover
+            color: $teal
+.lightgrey-text
+  color: #999
+.bold
+  font-weight: 700
+.teal-text
+  color: $teal
+.hidden
+  opacity: 0
+  pointer-events: none

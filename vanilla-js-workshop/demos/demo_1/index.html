@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>demo 1</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <section id="main">
+        <div class="float-note">
+            <div class="left active">
+            left
+            </div>
+            <div class="right">
+            right
+            </div>
+        </div>
+    </section>
+    <script>
+        const sides = Array.from(document.getElementsByClassName('float-note')[0].childNodes).filter(node => node.nodeType === 1);
+        sides.forEach(side => {
+          side.onclick = function(e) {
+            console.log('sides', sides);
+            this.classList.add('active');
+            sides.forEach(y => {
+              if (y !== side) { y.classList.remove('active') }
+            })
+          }
+        })
+    </script>
+</body>
+</html>

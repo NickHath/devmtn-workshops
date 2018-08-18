@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>demo 2</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+    <div id="display-data">
+        <div>cursor X: </div>
+        <div>cursor Y: </div>
+    </div>
+    <div id="movable-div">click to move
+        <hr>press enter to set hex background color</div>
+    <div class="modal">enter hex value</div>
+    <!-- JS___________________________________________________________ -->
+    <script>
+        const display = document.getElementById('display-data')
+        const movable = document.getElementById('movable-div')
+
+        document.body.onmousemove = trackCursorPosition
+        // stop moving div if cursor leaves window or on mouse up
+        document.body.onmouseleave = function () {
+            document.body.onmousemove = trackCursorPosition
+        }
+        document.body.onmouseup = function () {
+            document.body.onmousemove = trackCursorPosition
+        }
+        // while mouse is down, move div based on cursor movement
+        movable.onmousedown = function (mousedownEvent) {
+            const element = this
+            // mouse position in div = mousedownEvent.offsetX, Y
+            document.body.onmousemove = function (mousemoveEvent) {
+                trackCursorPosition(mousemoveEvent)
+                // get mouse position in div
+                moveDiv(element, mousemoveEvent.clientX, mousemoveEvent.clientY, mousedownEvent.offsetX, mousedownEvent.offsetY)
+            }
+        }
+
+        function moveDiv(element, offsetInWindowX, offsetInWindowY, offsetInDivX, offsetInDivY) {
+            const moveY = offsetInWindowY - offsetInDivY
+            const moveX = offsetInWindowX - offsetInDivX
+
+            if (moveY < 0) element.style.top = "0px"
+            else if (moveY > document.body.offsetHeight - element.offsetHeight)
+                element.style.top = document.body.offsetHeight - element.offsetHeight + "px"
+            else element.style.top = moveY + "px"
+
+            if (moveX < 0) element.style.left = "0px"
+            else if (moveX > document.body.offsetWidth - element.offsetWidth)
+                element.style.left = document.body.offsetWidth - element.offsetWidth + "px"
+            else element.style.left = moveX + "px"
+        }
+
+        function trackCursorPosition(e) {
+            display.children[0].innerHTML = 'cursor X: ' + e.clientX
+            display.children[1].innerHTML = 'cursor Y: ' + e.clientY
+        }
+
+        // set hex color of div by pressing enter
+        document.body.onkeyup = keylogger
+
+        let keysPressed = []
+        function keylogger(keyEvent) {
+            console.log('key event: ', keyEvent)
+            // check for strange keys
+            if (keyEvent.key.length > 1 && keyEvent.key !== "Enter") {
+                return 0;
+            }
+
+            if (keysPressed.length < 6) {
+                keysPressed.push(keyEvent.key)
+            } else {
+                keysPressed = keysPressed.slice(-5)
+                keysPressed.push(keyEvent.key)
+            }
+            if (keyEvent.key === "Enter") {
+                document.body.classList.toggle("enterPressed")
+                keysPressed = []
+            }
+            if (document.body.classList.contains("enterPressed")) {
+                document.getElementsByClassName('modal')[0].innerHTML = "Enter hex code: " + keysPressed.join(' ')
+            }
+            if (keysPressed.length === 6 && document.body.classList.contains('enterPressed')) {
+                document.body.style.background = "#" + keysPressed.join('')
+                document.body.classList.remove('enterPressed')
+            }
+        }
+    </script>
+</body>
+
+</html>

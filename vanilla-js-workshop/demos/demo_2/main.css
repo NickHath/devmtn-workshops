@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  background: #bada55;
+  overflow-y: hidden;
+  margin: 0;
+}
+
+#display-data {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  color: yellow;
+  padding: 0.4rem;
+}
+
+#movable-div {
+  height: 180px;
+  width: 180px;
+  padding: 1rem;
+  background: #dadada;
+  position: absolute;
+  top: 100px;
+  cursor: pointer;
+  user-select: none;
+  border-top: 4px solid #ccc;
+  border-left: 4px solid #ccc;
+  border-right: 4px solid #999;
+  border-bottom: 4px solid #999;
+}
+#movable-div:active {
+  border-top: 4px solid #999;
+  border-left: 4px solid #999;
+  border-right: 4px solid #ccc;
+  border-bottom: 4px solid #ccc;
+}
+
+.modal {
+  padding: 1rem;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  opacity: 0;
+  margin-left: -120px;
+  width: 240px;
+  background: #dadada;
+  border: 1px solid #999;
+}
+
+body.enterPressed .modal {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=main.css.map */
